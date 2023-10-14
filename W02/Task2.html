@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Task2</title>
+    </head>
+        <body>
+            <script>
+                class Vec3
+                {
+                    // Constructor
+                    constructor( x, y, z )
+                    {
+                        this.x = x;
+                        this.y = y;
+                        this.z = z;
+                    }
+                    min( )
+                    {
+                        let min = this.x;
+                        if (this.y < min) min = this.y;
+                        if (this.z < min) min = this.z;
+                        return min;
+                    }
+                    mid( )
+                    {   
+                        if(this.x >= this.y) 
+                       {
+                            if(this.y >= this.z)
+                            {
+                                return this.y;
+                            }
+                            else if(this.x <= this.z) 
+                            {
+                                return this.x;
+                            }
+                            else 
+                            {
+                                return this.z;
+                            }   
+                        }
+                        else if(this.x > this.z)
+                        {
+                            return this.x;
+                        }
+                        else if(this.y > this.z) 
+                        {
+                            return this.z;
+                        }
+                        else 
+                        {
+                            return this.y;
+                        }
+                    }
+                    max()
+                    {
+                        let max = this.x;
+                        if (this.y > max) max = this.y;
+                        if (this.z > max) max = this.z;
+                        return max;
+                    }
+                }
+
+                var x = 5, y = 4, z = 8;
+                var v = new Vec3( x, y, z );
+                var min = v.min();
+                var mid = v.mid(); 
+                var max = v.max();
+
+                document.write("min="+min);
+                document.write("mid="+mid);
+                document.write("max="+max);
+            </script>
+     </body>
+</html>
