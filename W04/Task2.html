@@ -6,7 +6,7 @@
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script>
 	 var padding = 20;
-	 var height = 20;
+	 var height = 10;
 	 var svg = d3.select("body").append("svg");
 	 d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W04/task2.csv", draw );
 	 function draw(data){
@@ -18,13 +18,13 @@
 	    	.attr("y", function(d,i){ return padding + i * ( height + padding ); })
 	    	.attr("width", function(d){ return d.population; })
 	    	.attr("height", height)
-		/*svg.selectAll("text")
+		svg.selectAll("text")
    		.data(data)
    		    .enter()
    		    .append("text")
 		    .text(function(d) {return d.prefecture;})
 		    .attr("x", function(d, i){ return 10;})
-		    .attr("y", function(d,i){ return padding + i * ( height + padding ); })*/
+		    .attr("y", function(d,i){ return padding + i * ( height + padding ); })
 	};
 	</script>
     </body>
