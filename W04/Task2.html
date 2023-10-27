@@ -25,7 +25,7 @@
    		    .append("text")
 		    .text(function(d) {return d.name;})
 		    .attr("x", function(d, i){ return 10;})
-		    .attr("y", function(d,i){ return padding + i * ( height + padding ); })
+		    .attr("y", function(d,i){ return padding + i * ( height + padding ) - 1; })
 	};
 	</script>
     </body>
