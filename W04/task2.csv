@@ -1,4 +1,4 @@
-width,color
-10,re
-15,green
-20,blue
+width,color,name
+10,red,label1
+15,green,label2
+20,blue,label3
