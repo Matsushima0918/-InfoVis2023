@@ -5,7 +5,7 @@ d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W08/task2.csv")
             parent: '#drawing_region',
             width: 256,
             height: 128,
-            margin: {top:30, right:30, bottom:30, left:60}
+            margin: {top:30, right:30, bottom:30, left:0}
         };
 
         const line_chart = new LineChart( config, data );
@@ -35,11 +35,11 @@ class LineChart {
         self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
         self.xscale = d3.scaleLinear()
-            .domain([0, d3.max(self.data, d => d.width)])
+            .domain([0, d3.max(self.data, d => d.y)])
             .range([0, self.inner_width]);
       
         self.yscale = d3.scaleBand()
-            .domain(self.data.map(d => d.name))
+            .domain(self.data.map(d => d.y))
             .range([0, self.inner_height])
             .paddingInner(0.1);
         self.xaxis = d3.axisBottom( self.xscale )
@@ -65,8 +65,8 @@ class LineChart {
         .x( d => d.x )
         .y( d => d.y );
 
-        self.append('path')
-        .attr('d', line(self.data))
+        self.svg.append('path')
+        .attr('d', self.line(self.data))
         .attr('stroke', 'black')
         .attr('fill', 'none');
     }
