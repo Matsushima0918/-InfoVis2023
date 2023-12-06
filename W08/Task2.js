@@ -1,4 +1,4 @@
-d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W04/task2.csv")
+d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W08/task2.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; });
      var config = {
@@ -8,18 +8,18 @@ d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W04/task2.csv")
             margin: {top:30, right:30, bottom:30, left:60}
         };
 
-        const bar_chart = new BarChart( config, data );
-        bar_chart.update();
+        const line_chart = new LineChart( config, data );
+        line_chart.update();
     })
     .catch( error => {
         console.log( error );
     });
-class BarChart {
+class LineChart {
     constructor( config, data ) {
         this.config = {
             parent: config.parent,
             width: config.width || 256,
-            height: config.height || 256,
+            height: config.height || 128,
             margin: config.margin || {top:10, right:10, bottom:20, left:60}
         }
         this.data = data;
@@ -27,7 +27,7 @@ class BarChart {
     }
     init() {
         let self = this;
-        self.svg = d3.select( self.config.parent )
+        self.svg = d3.select( '#drawing_region' )
             .attr('width', self.config.width)
             .attr('height', self.config.height);
         self.chart = self.svg.append('g')
@@ -61,13 +61,13 @@ class BarChart {
     }
     render() {
         let self = this;
-        self.chart.selectAll("rect").data(self.data).enter()
-        .append("rect")
-        .attr("x", 0)
-        .attr("y", d => self.yscale(d.name))
-        .attr("width", d => self.xscale(d.width))
-        .attr("height", self.yscale.bandwidth())
-        .attr("fill", function(d){ return d.color; });
+        self.line = d3.line()
+        .x( d => d.x )
+        .y( d => d.y );
 
+        self.append('path')
+        .attr('d', line(self.data))
+        .attr('stroke', 'black')
+        .attr('fill', 'none');
     }
 }
