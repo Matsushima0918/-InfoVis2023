@@ -1,4 +1,4 @@
-d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W10/task1.csv")
+d3.csv("https://Matsushima0918.github.io/-InfoVis2023/W04/task2.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; });
      var config = {
@@ -58,11 +58,9 @@ class BarChart {
     }
     update() {
         let self = this;
-        d3.select('#reverse')
+        d3.selectAll('#reverse')
             .on('click', d => {
-            d.name.reverse();
-            d.width.reverse();
-            d.color.reverse();
+            self.data.reverse();
         })
         self.render();
 
@@ -74,8 +72,7 @@ class BarChart {
         .enter()
         .append("rect")
         .attr("x", 0)
-        //.attr("y", d => self.yscale(d.name))
-        .attr("y", (d,i) => padding + i * ( height + padding))
+        .attr("y", d => self.yscale(d.name))
         .attr("width", d => self.xscale(d.width))
         .attr("height", self.yscale.bandwidth())
         //.attr("fill", d=> d.color );
