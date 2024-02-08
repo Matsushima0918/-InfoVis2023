@@ -8,7 +8,7 @@ class ScatterPlot {
             margin: config.margin || {top:10, right:10, bottom:10, left:10},
             xlabel: config.xlabel || '',
             ylabel: config.ylabel || '',
-            cscale: config.cscale
+            //cscale: config.cscale
         }
         this.data = data;
         this.init();
