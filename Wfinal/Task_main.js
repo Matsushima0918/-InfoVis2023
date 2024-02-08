@@ -44,7 +44,7 @@ function Filter() {
         scatter_plot.data = input_data;
     }
     else {
-        scatter_plot.data = input_data.filter( d => filter.includes( d.prefecture ) );
+        scatter_plot.data = input_data.filter( d => filter.includes( d.Prefecture ) );
     }
     scatter_plot.update();
 }
