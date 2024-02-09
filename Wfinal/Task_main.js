@@ -27,8 +27,8 @@ d3.csv("https://Matsushima0918.github.io/-InfoVis2023/Wfinal/Task.csv")
 
         bar_chart = new BarChart( {
             parent: '#drawing_region_barchart',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Age categories',
             cscale: color_scale
@@ -41,10 +41,10 @@ d3.csv("https://Matsushima0918.github.io/-InfoVis2023/Wfinal/Task.csv")
 
 function Filter() {
     if ( filter.length == 0 ) {
-        scatter_plot.data = input_data;
+        bar_chart.data = input_data;
     }
     else {
-        scatter_plot.data = input_data.filter( d => filter.includes( d.Prefecture ) );
+        bar_chart.data = input_data.filter( d => filter.includes( d.Prefecture ) );
     }
     scatter_plot.update();
 }

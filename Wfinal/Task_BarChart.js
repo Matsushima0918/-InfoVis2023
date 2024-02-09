@@ -28,8 +28,8 @@ class BarChart {
 
         self.xscale = d3.scaleBand()
             .range([0, self.inner_width])
-            .paddingInner(0.2)
-            .paddingOuter(0.1);
+            .paddingInner(0.8)
+            .paddingOuter(0.3);
 
         self.yscale = d3.scaleLinear()
             .range([self.inner_height, 0]);
@@ -68,7 +68,7 @@ class BarChart {
     update() {
         let self = this;
 
-        const data_map = d3.rollup( self.data, v => v.length, d => d.species );
+        const data_map = d3.rollup( self.data, v => v.length, d => d.Prefecture );
         self.aggregated_data = Array.from( data_map, ([key,count]) => ({key,count}) );
 
         self.cvalue = d => d.key;
@@ -85,6 +85,14 @@ class BarChart {
         self.render();
     }
 
+    // let self = this;
+    // self.chart.selectAll("rect").data(self.data).enter()
+    // .append("rect")
+    // .attr("x", 0)
+    // .attr("y", d => self.yscale(d.name))
+    // .attr("width", d => self.xscale(d.width))
+    // .attr("height", self.yscale.bandwidth())
+    
     render() {
         let self = this;
 

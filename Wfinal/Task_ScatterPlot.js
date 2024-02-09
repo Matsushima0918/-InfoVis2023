@@ -129,6 +129,17 @@ class ScatterPlot {
             .on('mouseleave', () => {
                 d3.select('#tooltip')
                     .style('opacity', 0);
+            })
+            .on('click', function(ev,d) {
+                const is_active = filter.includes(d.key);
+                if ( is_active ) {
+                    filter = filter.filter( f => f !== d.key );
+                }
+                else {
+                    filter.push( d.key );
+                }
+                Filter();
+                d3.select(this).classed('active', !is_active);
             });
 
         self.xaxis_group
