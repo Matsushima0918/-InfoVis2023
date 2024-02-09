@@ -68,11 +68,6 @@ class BarChart {
     update() {
         let self = this;
 
-        const data_map = d3.rollup( self.data, v => v.length, d => d.Prefecture );
-        self.aggregated_data = Array.from( data_map, ([key,count]) => ({key,count}) );
-
-        self.cvalue = d => d.key;
-        self.xvalue = d => d.key;
         self.yvalue = d => d.count;
 
         const items = self.aggregated_data.map( self.xvalue );
@@ -100,7 +95,7 @@ class BarChart {
             .data(self.aggregated_data)
             .join("rect")
             .attr("class", "bar")
-            .attr("x", d => self.xscale( self.xvalue(d) ) )
+            .attr("x", d => self.xscale( d.Age categories ) )
             .attr("y", d => self.yscale( self.yvalue(d) ) )
             .attr("width", self.xscale.bandwidth())
             .attr("height", d => self.inner_height - self.yscale( self.yvalue(d) ))
