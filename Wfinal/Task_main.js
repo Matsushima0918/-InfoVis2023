@@ -27,7 +27,7 @@ d3.csv("https://Matsushima0918.github.io/-InfoVis2023/Wfinal/Task.csv")
 
         bar_chart = new BarChart( {
             parent: '#drawing_region_barchart',
-            width: 512,
+            width: 768,
             height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Age categories',

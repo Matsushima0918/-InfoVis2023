@@ -134,10 +134,10 @@ class ScatterPlot {
                 d3.select('#tooltip')
                     .style('opacity', 0);
             })
-            // .on('click', function(ev,d) {
-            //     filter.push( d.key );
-            //     Filter();
-            // });
+            .on('click', function(ev,d) {
+                filter.push( d.Prefecture );
+                Filter();
+            });
 
         self.xaxis_group
             .call( self.xaxis );

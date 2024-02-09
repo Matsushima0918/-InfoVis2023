@@ -28,8 +28,8 @@ class BarChart {
 
         self.xscale = d3.scaleBand()
             .range([0, self.inner_width])
-            .paddingInner(0.8)
-            .paddingOuter(0.3);
+            .paddingInner(0.1)
+            .paddingOuter(0.2);
 
         self.yscale = d3.scaleLinear()
             .range([self.inner_height, 0]);
@@ -68,14 +68,14 @@ class BarChart {
     update() {
         let self = this;
 
-        // const data_map = d3.rollup( self.data, v => v.length, d => d.Age_categories);
-        // self.aggregated_data = Array.from( data_map, ([key,count]) => ({key,count}) );
+        const data_map = d3.rollup( self.data, v => v.length, d => d.Age_categories);
+        self.aggregated_data = Array.from( data_map, ([key,count]) => ({key,count}) );
 
-        // self.cvalue = d => d.Prefecture;
-        // self.xvalue = d => d.Age_categories;
-        // self.yvalue = d => d.Age_categories;
+        //self.cvalue = d => d.key;
+        self.xvalue = d => d.key;
+        self.yvalue = d => d.count;
 
-        // const items = self.aggregated_data.map( self.xvalue );
+        const items = self.aggregated_data.map( self.xvalue );
         self.xscale.domain(items);
 
         const ymin = 0;
@@ -97,15 +97,14 @@ class BarChart {
         let self = this;
 
         self.chart.selectAll(".bar")
-            .data(self.data)
-            //.data(self.aggregated_data)
+            .data(self.aggregated_data)
             .join("rect")
             .attr("class", "bar")
             .attr("x", d => self.xscale( self.xvalue(d) ) )
             .attr("y", d => self.yscale( self.yvalue(d) ) )
             .attr("width", self.xscale.bandwidth())
             .attr("height", d => self.inner_height - self.yscale( self.yvalue(d) ))
-            .attr("fill", d => self.config.cscale( self.cvalue(d) ));
+            //.attr("fill", d => self.config.cscale( self.cvalue(d) ));
 
         self.xaxis_group
             .call(self.xaxis);
