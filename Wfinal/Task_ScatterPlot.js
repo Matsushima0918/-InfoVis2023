@@ -13,6 +13,7 @@ class ScatterPlot {
         this.data = data;
         this.init();
     }
+    
 
     init() {
         let self = this;
@@ -69,7 +70,10 @@ class ScatterPlot {
 
     update() {
         let self = this;
-        self.cvalue = d => d.species; ///???????
+
+        const data_map = d3.rollup( self.data, v => v.length, d => d.Prefecture );
+        self.aggregated_data = Array.from( data_map, ([key,count]) => ({key,count}) );
+        self.cvalue = d => d.key; 
         self.xvalue = d => d.into;
         self.yvalue = d => d.out;
 
@@ -130,17 +134,10 @@ class ScatterPlot {
                 d3.select('#tooltip')
                     .style('opacity', 0);
             })
-            .on('click', function(ev,d) {
-                const is_active = filter.includes(d.key);
-                if ( is_active ) {
-                    filter = filter.filter( f => f !== d.key );
-                }
-                else {
-                    filter.push( d.key );
-                }
-                Filter();
-                d3.select(this).classed('active', !is_active);
-            });
+            // .on('click', function(ev,d) {
+            //     filter.push( d.key );
+            //     Filter();
+            // });
 
         self.xaxis_group
             .call( self.xaxis );
